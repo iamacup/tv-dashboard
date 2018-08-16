@@ -31,6 +31,12 @@ const drawDownloadToSignUpChart = (data) => {
       stack: 'main',
       areaStyle: { normal: {} },
       data: subData,
+      label: {
+        normal: {
+          show: true,
+          position: 'inside',
+        },
+      },
     });
   });
 
@@ -243,12 +249,21 @@ const drawStickinessChart = (data) => {
   const myChart = echarts.init(document.getElementById('main8'));
 
   const seriesData = [];
+  const markPointData = [];
   let count = 0;
 
   data.series[0].combined.forEach((value) => {
     if (count !== 0) {
-      const percentage = (value.count / value.outof) * 100;
+      let percentage = (value.count / value.outof) * 100;
+      percentage = Math.round(percentage * 10) / 10;
+
       seriesData.push(percentage);
+
+      const markPoint = {
+        name: '', value: `${percentage}%`, xAxis: count - 1, yAxis: percentage,
+      };
+
+      markPointData.push(markPoint);
     }
 
     count++;
@@ -271,6 +286,9 @@ const drawStickinessChart = (data) => {
     },
     series: [{
       data: seriesData,
+      markPoint: {
+        data: markPointData,
+      },
       type: 'line',
       smooth: true,
     }],
@@ -309,6 +327,12 @@ drawReturningUsersChart = (data) => {
       data: seriesData,
       type: 'line',
       smooth: true,
+      label: {
+        normal: {
+          show: true,
+          position: 'inside',
+        },
+      },
     }],
   };
 
