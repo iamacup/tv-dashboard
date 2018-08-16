@@ -1,6 +1,4 @@
-# A tool for generating a random population on the AlumniBase backend
-
-Generates a population for alumni base based on some variables.
+# A tool for displaying data from various sources onto a simple html5 dashboard for use on a TV
 
 ## Setup
 
@@ -16,8 +14,8 @@ Generates a population for alumni base based on some variables.
 
 With `npm`:
 
-    npm start
+    npm start <aptitude username> <aptitude password>
 
 or with `yarn`:
 
-    yarn start
+    yarn start <aptitude username> <aptitude password>
