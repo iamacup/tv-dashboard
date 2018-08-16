@@ -1,0 +1,126 @@
+<html>
+	<head>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<title>JAFA DASH</title>
+		<style>
+			body {
+				background: #e84e0e;
+			}
+			.outer-box {
+				padding: 10px;
+				height: 100%;
+			}
+			.inner-box {
+				height: 100%;
+			}
+			.my-card {
+			  background: #fff;
+			  border-radius: 2px;
+			  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+			}
+		</style>
+	</head>
+	<body>
+
+		<div class="container-fluid">
+			<div class="row no-gutters" style="height: 33%">
+				<div class="col" style="height: 100%">
+					<div class="outer-box">
+						<div class="inner-box">
+							<div class="my-card">
+								<div id="main1" style="width: 100%; height:100%;" class="d-flex justify-content-center">
+									<div class="align-self-center text-center">
+											<h3>Daily Active Users</h3>
+											<br/>
+											<h4>Today: <span class="font-weight-bold" id="dau1">0</span></h4>
+											<h4>Target: <span class="font-weight-bold" id="dau3">0</span></h4>
+											<h4>Same Day Last Week: <span class="font-weight-bold" id="dau2">0</span></h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col" style="height: 100%">
+					<div class="outer-box">
+						<div class="inner-box">
+							<div class="my-card">
+								<div id="main2" style="width: 100%; height:100%;"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col" style="height: 100%">
+					<div class="outer-box">
+						<div class="inner-box">
+							<div class="my-card">
+								<div id="main3" style="width: 100%; height:100%;"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col" style="height: 100%">
+					<div class="outer-box">
+						<div class="inner-box">
+							<div class="my-card">
+								<div id="main4" style="width: 100%; height:100%;"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row no-gutters" style="height: 33%">
+				<div class="col" style="height: 100%">
+					<div class="outer-box">
+						<div class="inner-box">
+							<div class="my-card">
+								<div id="main5" style="width: 100%; height:100%;"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col" style="height: 100%">
+					<div class="outer-box">
+						<div class="inner-box">
+							<div class="my-card">
+								<div id="main6" style="width: 100%; height:100%;"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row no-gutters" style="height: 33%">
+				<div class="col" style="height: 100%">
+					<div class="outer-box">
+						<div class="inner-box">
+							<div class="my-card">
+								<div id="main7" style="width: 100%; height:100%;"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col" style="height: 100%">
+					<div class="outer-box">
+						<div class="inner-box">
+							<div class="my-card">
+								<div id="main8" style="width: 100%; height:100%;"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<script src="https://unpkg.com/echarts@4.1.0/dist/echarts.min.js"></script>
+		<script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
+		<script src="https://unpkg.com/countup.js@1.9.3/dist/countUp.min.js"></script>
+
+		<!-- We load an endpoint that responds with javascript -->
+		<script src="http://localhost:8080/chartjs.js"></script>
+	</body>
+</html>
