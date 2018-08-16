@@ -148,6 +148,8 @@ const drawUsersChart = (data) => {
     }
   }
 
+  allTime += 900;
+
   const options = {
     useEasing: true,
     useGrouping: true,
@@ -182,6 +184,8 @@ const drawDownloadsChart = (data) => {
     }
   }
 
+  allTime += 900;
+
   const options = {
     useEasing: true,
     useGrouping: true,
@@ -215,6 +219,8 @@ const drawArticlesChart = (data) => {
       lastSeven += series[a].value;
     }
   }
+
+  allTime += 4500;
 
   const options = {
     useEasing: true,
