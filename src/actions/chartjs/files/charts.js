@@ -353,9 +353,31 @@ const drawCharts = async () => {
     drawArticlesChart(response.data.payload.articles);
     drawStickinessChart(response.data.payload.stickiness);
     drawReturningUsersChart(response.data.payload.returningUsers);
+
+    const d = new Date();
+    let hr = d.getHours();
+    let min = d.getMinutes();
+
+    if (min < 10) {
+      min = `0${min}`;
+    }
+
+    let ampm = 'am';
+
+    if (hr > 12) {
+      hr -= 12;
+      ampm = 'pm';
+    }
+
+    const finalDate = `${hr}:${min}${ampm}`;
+
+    console.log(finalDate);
+
+    $('#update').text(`Last Updated: ${finalDate}`);
   } else {
     console.log('ERROR!!!');
     console.log(response);
+    $('#update').text('Something went wrong!!');
   }
 
   setTimeout(drawCharts, updatefrequency * 1000);
