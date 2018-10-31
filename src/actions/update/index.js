@@ -1,31 +1,51 @@
 
 const axios = require('axios');
+const likes = require('likes');
+const instagramScraper = require('simple-instagram-scraper');
 
 module.exports = async () => {
+  /* DO THE SOCIAL STUFF */
+
+  const twitter = new Promise((resolve, reject) => {
+    likes.twitter('jafa', (err, count) => {
+      if (err) {
+        resolve('???');
+      }
+
+      resolve(count);
+    });
+  });
+
+  const twitterFollowers = await twitter;
+
+  const report = await instagramScraper.getReport('jafa.app');
+  const instagramFollowers = report.followers;
+
+  /* DO THE AMPLITUDE STUFF */
+
   const auth = {
     username: process.argv[2],
     password: process.argv[3],
   };
 
-  const downloadsToSignupCode = 'b7t6nxx';
-  const dauCode = 'qj6bgvy';
-  const mauCode = '63sqmo7';
-  const usersCode = 'et73u1c';
-  const downloadsCode = 'sw9zs94';
-  const articlesCode = 'rc3bz5y';
-  const stickinessCode = 'jey1ilo';
-  const returningUsersCode = 'tiy61qd';
+  const dataObj = {
+    retention: 'qnx46wc',
+    day30: 'qac043w',
+    day1: 'e901yjc',
+    druDaily: 'qmhat7x',
+    druWeekly: 'yqsrdhz',
+    druMonthly: 'risws1c',
+    mauWeekly: 'agjrhdl',
+    mauMonthly: 'rplk2io',
+  };
+
+  const keys = Object.keys(dataObj);
 
   const promises = [];
 
-  promises.push(axios.get(`https://amplitude.com/api/3/chart/${downloadsToSignupCode}/query`, { auth }));
-  promises.push(axios.get(`https://amplitude.com/api/3/chart/${dauCode}/query`, { auth }));
-  promises.push(axios.get(`https://amplitude.com/api/3/chart/${mauCode}/query`, { auth }));
-  promises.push(axios.get(`https://amplitude.com/api/3/chart/${usersCode}/query`, { auth }));
-  promises.push(axios.get(`https://amplitude.com/api/3/chart/${downloadsCode}/query`, { auth }));
-  promises.push(axios.get(`https://amplitude.com/api/3/chart/${articlesCode}/query`, { auth }));
-  promises.push(axios.get(`https://amplitude.com/api/3/chart/${stickinessCode}/query`, { auth }));
-  promises.push(axios.get(`https://amplitude.com/api/3/chart/${returningUsersCode}/query`, { auth }));
+  keys.forEach((value) => {
+    promises.push(axios.get(`https://amplitude.com/api/3/chart/${dataObj[value]}/query`, { auth }));
+  });
 
   try {
     const res = await Promise.all(promises);
@@ -33,24 +53,17 @@ module.exports = async () => {
     const payload = {};
 
     res.forEach((value) => {
-      if (value.config.url.includes(downloadsToSignupCode)) {
-        payload.downloadToSignUp = value.data.data;
-      } else if (value.config.url.includes(dauCode)) {
-        payload.dau = value.data.data;
-      } else if (value.config.url.includes(mauCode)) {
-        payload.mau = value.data.data;
-      } else if (value.config.url.includes(usersCode)) {
-        payload.users = value.data.data;
-      } else if (value.config.url.includes(downloadsCode)) {
-        payload.downloads = value.data.data;
-      } else if (value.config.url.includes(articlesCode)) {
-        payload.articles = value.data.data;
-      } else if (value.config.url.includes(stickinessCode)) {
-        payload.stickiness = value.data.data;
-      } else if (value.config.url.includes(returningUsersCode)) {
-        payload.returningUsers = value.data.data;
-      }
+      keys.forEach((value2) => {
+        if (value.config.url.includes(dataObj[value2])) {
+          payload[value2] = value.data.data;
+        }
+      });
     });
+
+    payload.social = {
+      twitterFollowers,
+      instagramFollowers,
+    };
 
     return {
       generalStatus: 'success',
@@ -58,12 +71,12 @@ module.exports = async () => {
       payload,
     };
   } catch (error) {
-    console.log(error);
+    console.log(error.response);
 
     return {
       generalStatus: 'error',
       statusCode: '1',
-      payload: 'There was an error!',
+      payload: error.response.data,
     };
   }
 };

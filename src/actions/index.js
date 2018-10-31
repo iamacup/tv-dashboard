@@ -1,10 +1,8 @@
 
-const home = require('./home');
 const update = require('./update');
-const chartjs = require('./chartjs');
+const error = require('./error');
 
 module.exports = {
-  home,
   update,
-  chartjs,
+  error,
 };

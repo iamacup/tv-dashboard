@@ -1,5 +1,4 @@
 
-
 // actions
 const actions = require('../actions');
 
@@ -10,14 +9,8 @@ const appRouter = (app) => {
     res.status(200).send(response);
   });
 
-  app.get('/chartjs.js', async (req, res) => {
-    const response = await actions.chartjs();
-
-    res.status(200).send(response);
-  });
-
-  app.get('*', async (req, res) => {
-    const response = await actions.home();
+  app.post('/error', async (req, res) => {
+    const response = await actions.error(req.body);
 
     res.status(200).send(response);
   });

@@ -5,3 +5,5 @@ node_modules
 configuration-items/environments/arango/data-in/dump/
 
 *.sublime-workspace
+
+start-command.txt
